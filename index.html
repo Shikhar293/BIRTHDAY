@@ -1,0 +1,378 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Happy Birthday Wishes!</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Lobster&family=Roboto:wght@400;700&display=swap');
+
+  body {
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(135deg, #fceabb 0%, #f8b500 100%);
+    font-family: 'Roboto', sans-serif;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    color: #4a2c00;
+  }
+
+  .container {
+    background-color: rgba(255, 255, 255, 0.85);
+    padding: 3rem 4rem 5rem 4rem; /* extra bottom padding for balloons */
+    border-radius: 20px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+    text-align: center;
+    max-width: 450px;
+    position: relative;
+    overflow: visible;
+  }
+
+  /* Cake SVG container */
+  .cake-container {
+    width: 130px;
+    margin: 0 auto 1rem auto;
+  }
+
+  h1 {
+    font-family: 'Lobster', cursive;
+    font-size: 3.75rem;
+    margin-bottom: 0.2rem;
+    color: #ff4a00;
+    text-shadow: 2px 2px 2px #bb3700;
+  }
+
+  h2 {
+    font-weight: 700;
+    font-size: 1.5rem;
+    margin: 0.8rem 0 2rem 0;
+    color: #7f3f00;
+  }
+
+  p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin-bottom: 2rem;
+  }
+
+  button {
+    cursor: pointer;
+    background: #ff7f27;
+    border: none;
+    padding: 0.9rem 2.4rem;
+    border-radius: 40px;
+    color: white;
+    font-weight: 700;
+    font-size: 1.1rem;
+    box-shadow: 0 8px 15px rgba(255, 127, 39, 0.4);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: visible;
+  }
+  button:hover {
+    background: #ff4a00;
+    box-shadow: 0 15px 25px rgba(255, 74, 0, 0.7);
+    transform: translateY(-3px);
+  }
+
+  .confetti-piece {
+    position: fixed;
+    background-color: #ff4a00;
+    width: 10px;
+    height: 10px;
+    opacity: 0;
+    pointer-events: none;
+    animation: fly 2s ease forwards;
+    border-radius: 3px;
+  }
+  @keyframes fly {
+    0% {
+      transform: translateY(0) rotate(0deg);
+      opacity: 1;
+    }
+    100% {
+      transform: translateY(-300px) rotate(360deg);
+      opacity: 0;
+    }
+  }
+
+  /* Sparkle styles */
+  .sparkle {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    background: radial-gradient(circle, #fff6e8 0%, #ffea8a 40%, transparent 70%);
+    border-radius: 50%;
+    opacity: 0;
+    pointer-events: none;
+    filter: drop-shadow(0 0 3px #fffba1);
+    animation: sparkle-fade 1000ms forwards;
+  }
+  @keyframes sparkle-fade {
+    0% {
+      opacity: 1;
+      transform: scale(0.7);
+    }
+    100% {
+      opacity: 0;
+      transform: scale(1.6);
+    }
+  }
+
+  /* Party popper */
+  .popper {
+    position: absolute;
+    width: 24px;
+    height: 24px;
+    bottom: 50%;
+    left: 50%;
+    transform: translate(-50%, 50%) scale(0);
+    fill: #ff4a00;
+    filter: drop-shadow(0 0 3px #ff6f3c);
+    animation: popper-pop 600ms forwards;
+    pointer-events: none;
+    z-index: 1000;
+  }
+
+  @keyframes popper-pop {
+    0% {
+      transform: translate(-50%, 50%) scale(0) rotate(0deg);
+      opacity: 1;
+    }
+    50% {
+      transform: translate(-50%, 0) scale(1.2) rotate(20deg);
+      opacity: 1;
+    }
+    100% {
+      transform: translate(-50%, -150px) scale(0) rotate(45deg);
+      opacity: 0;
+    }
+  }
+
+  /* Balloon styles */
+  .balloon {
+    position: absolute;
+    bottom: -80px; /* start just below container bottom */
+    width: 40px;
+    height: 55px;
+    border-radius: 30px 30px 30px 30px / 55px 55px 45px 45px;
+    opacity: 0.9;
+    filter: drop-shadow(0 1px 2px rgba(0,0,0,0.2));
+    animation-timing-function: ease-in-out;
+    animation-fill-mode: forwards;
+    pointer-events: none;
+  }
+
+  .balloon-string {
+    position: absolute;
+    bottom: -20px;
+    width: 2px;
+    height: 18px;
+    background: #444;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 1px;
+  }
+
+  /* Balloon colors */
+  .balloon.red { background: #ff4a4a; }
+  .balloon.blue { background: #4a90e2; }
+  .balloon.green { background: #4ade80; }
+  .balloon.yellow { background: #fed766; }
+  .balloon.purple { background: #a974f7; }
+  .balloon.orange { background: #f79d65; }
+
+  /* Balloon rise and sway animations */
+  @keyframes riseSway1 {
+    0% { transform: translateY(0) translateX(0); opacity: 1; }
+    50% { transform: translateY(-150vh) translateX(10px); opacity: 0.6; }
+    100% { transform: translateY(-300vh) translateX(0); opacity: 0; }
+  }
+  @keyframes riseSway2 {
+    0% { transform: translateY(0) translateX(0); opacity: 1; }
+    50% { transform: translateY(-160vh) translateX(-10px); opacity: 0.6; }
+    100% { transform: translateY(-310vh) translateX(0); opacity: 0; }
+  }
+  @keyframes riseSway3 {
+    0% { transform: translateY(0) translateX(0); opacity: 1; }
+    50% { transform: translateY(-140vh) translateX(8px); opacity: 0.6; }
+    100% { transform: translateY(-290vh) translateX(0); opacity: 0; }
+  }
+  @keyframes riseSway4 {
+    0% { transform: translateY(0) translateX(0); opacity: 1; }
+    50% { transform: translateY(-155vh) translateX(-8px); opacity: 0.6; }
+    100% { transform: translateY(-305vh) translateX(0); opacity: 0; }
+  }
+  @keyframes riseSway5 {
+    0% { transform: translateY(0) translateX(0); opacity: 1; }
+    50% { transform: translateY(-150vh) translateX(12px); opacity: 0.6; }
+    100% { transform: translateY(-300vh) translateX(0); opacity: 0; }
+  }
+
+</style>
+</head>
+<body>
+  <div class="container" role="main" aria-label="Birthday Wish to Best Friend">
+    <!-- Cake SVG -->
+    <div class="cake-container" aria-hidden="true">
+      <svg width="130" height="130" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" >
+        <g fill="#f06d06" stroke="#c85400" stroke-width="1.5">
+          <!-- Cake base -->
+          <rect x="10" y="25" width="44" height="26" rx="6" ry="6" fill="#ffad33" stroke="#cc8400"/>
+          <!-- Cake layer stripes -->
+          <rect x="10" y="38" width="44" height="6" fill="#ffdf99"/>
+          <rect x="10" y="32" width="44" height="3" fill="#fff3cc"/>
+          <!-- Icing drip -->
+          <path d="M10 25c3 5 14 5 22 0 8 5 19 5 22 0v6H10v-6z" fill="#fff4e1"/>
+          <!-- Candles -->
+          <rect x="18" y="12" width="3" height="13" fill="#d72631" rx="1" ry="1"/>
+          <rect x="28" y="12" width="3" height="13" fill="#d72631" rx="1" ry="1"/>
+          <rect x="38" y="12" width="3" height="13" fill="#d72631" rx="1" ry="1"/>
+          <!-- Flames -->
+          <path d="M19.2 10.6c0 2.1-2 3.2-2 3.2s.6-1.7.6-2.7c0-1.6 1.4-1.4 1.4.5z" fill="#fce570"/>
+          <path d="M29.2 10.6c0 2.1-2 3.2-2 3.2s.6-1.7.6-2.7c0-1.6 1.4-1.4 1.4.5z" fill="#fce570"/>
+          <path d="M39.2 10.6c0 2.1-2 3.2-2 3.2s.6-1.7.6-2.7c0-1.6 1.4-1.4 1.4.5z" fill="#fce570"/>
+        </g>
+      </svg>
+    </div>
+    
+
+    <h1>Happy Birthday!</h1>
+    <h2><div id="bold"></div>To My Bestest,Sweetest,Loveliest Guardian Angel😘🎉</h2>
+    <p>
+      Wishing you a day filled with love, laughter, and all the happiness you deserve. 
+      You're not just my friend or my pasandida aurat — you're family,my world, my everything. Here's to many more amazing years ahead!❤️
+    </p>
+    <button id="wishButton" aria-label="Send Birthday Wish Confetti, Balloons and Sparkle Animation">Celebrate 🎈</button>
+  </div>
+
+  <script>
+    const button = document.getElementById('wishButton');
+    const container = document.querySelector('.container');
+
+    function createConfettiPiece() {
+      const confetti = document.createElement('div');
+      confetti.classList.add('confetti-piece');
+      confetti.style.backgroundColor = `hsl(${Math.floor(Math.random() * 360)}, 90%, 60%)`;
+      confetti.style.left = Math.random() * window.innerWidth + 'px';
+      confetti.style.top = window.innerHeight + 'px';
+      confetti.style.width = (6 + Math.random() * 8) + 'px';
+      confetti.style.height = confetti.style.width;
+      confetti.style.opacity = 1;
+      confetti.style.borderRadius = Math.random() > 0.5 ? '0' : '50%';
+
+      document.body.appendChild(confetti);
+
+      setTimeout(() => {
+        confetti.remove();
+      }, 2000);
+
+      return confetti;
+    }
+
+    function launchConfetti() {
+      for(let i = 0; i < 40; i++) {
+        setTimeout(() => {
+          createConfettiPiece();
+        }, i * 50);
+      }
+    }
+
+    function createSparkle(x, y) {
+      const sparkle = document.createElement('div');
+      sparkle.classList.add('sparkle');
+      sparkle.style.left = x + 'px';
+      sparkle.style.top = y + 'px';
+      sparkle.style.opacity = '1';
+
+      button.appendChild(sparkle);
+
+      // Remove sparkle after animation
+      sparkle.addEventListener('animationend', () => sparkle.remove());
+    }
+
+    function sprinkleSparkle() {
+      const rect = button.getBoundingClientRect();
+      // Create multiple sparkles around button area randomly
+      for(let i = 0; i < 15; i++) {
+        const x = Math.random() * rect.width;
+        const y = Math.random() * rect.height;
+        createSparkle(x, y);
+      }
+    }
+
+    function createPopper() {
+      const popperSVG = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+      popperSVG.setAttribute('viewBox', '0 0 24 24');
+      popperSVG.classList.add('popper');
+      // Simple stylized party popper shape
+      popperSVG.innerHTML = `
+        <path d="M2 21h20L12 2 2 21z" />
+        <path d="M16 16l2 2M12 12l4 4M8 16l4-4" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      `;
+      button.appendChild(popperSVG);
+      // Remove after animation ends
+      popperSVG.addEventListener('animationend', () => {
+        popperSVG.remove();
+      });
+    }
+
+    // Balloon creation and animation function
+    const balloonColors = ['red', 'blue', 'green', 'yellow', 'purple', 'orange'];
+    const riseAnimations = ['riseSway1', 'riseSway2', 'riseSway3', 'riseSway4', 'riseSway5'];
+
+    function createBalloon() {
+      const balloon = document.createElement('div');
+      const color = balloonColors[Math.floor(Math.random() * balloonColors.length)];
+      balloon.classList.add('balloon', color);
+
+      const rect = container.getBoundingClientRect();
+      const leftPos = Math.random() * (rect.width - 40); // balloon width approx 40px
+
+      balloon.style.left = leftPos + 'px';
+      // Random animation duration between 5 and 8 seconds
+      const duration = 5000 + Math.random() * 3000;
+      const animName = riseAnimations[Math.floor(Math.random() * riseAnimations.length)];
+      balloon.style.animation = `${animName} ${duration}ms ease-in forwards`;
+
+      // Add balloon string
+      const string = document.createElement('div');
+      string.classList.add('balloon-string');
+      balloon.appendChild(string);
+
+      container.appendChild(balloon);
+
+      // Remove balloon after animation completes
+      balloon.addEventListener('animationend', () => {
+        balloon.remove();
+      });
+    }
+
+    function launchBalloons() {
+      const count = 12;
+      for (let i = 0; i < count; i++) {
+        setTimeout(() => {
+          createBalloon();
+        }, i * 300);
+      }
+    }
+
+    button.addEventListener('click', () => {
+      createPopper();
+      launchConfetti();
+      sprinkleSparkle();
+      launchBalloons();
+      button.disabled = true;
+      button.textContent = "🎉 Wishing You! 🎉";
+      setTimeout(() => {
+        button.disabled = false;
+        button.textContent = "Celebrate 🎈";
+      }, 6000);
+    });
+  </script>
+</body>
+</html>
